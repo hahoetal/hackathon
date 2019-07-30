@@ -36,20 +36,37 @@ def search(request):
         search_lists = Data.objects.all()
     return render(request, 'search.html', {'search_list': search_list})
 
-
+# 사용자로부터 음식 종류(1개 혹은 2개 이상)와 가격 범위를 입력받아 메뉴를 필터링해주는 함수.
+# 더 간단하게 만들 수 있을 것 같음... 좀 더 고민해보기!!
 def pricefilter(request):
     try:
- 
-            minprice = request.GET.get('min_price')
-            maxprice = request.GET.get('max_price')
-            choice = request.GET.get('category')
+        choice = ['','','','','','']
+        search_list = []
+        choice_list = []
 
-            search_list = Data.objects.filter(category__contains= choice).filter(price__gte=minprice).filter(price__lte=maxprice).order_by('price')
-           
+        minprice = request.GET.get('min_price')
+        maxprice = request.GET.get('max_price')
+
+        choice[0] = request.GET.get('category1', 0)
+        choice[1] = request.GET.get('category2', 0)
+        choice[2] = request.GET.get('category3', 0)
+        choice[3] = request.GET.get('category4', 0)
+        choice[4] = request.GET.get('category5', 0)
+        choice[5] = request.GET.get('category6', 0)
+            
+        for i in range(0, 6):
+            if choice[i] != 0:
+                choice_list = Data.objects.filter(category__contains= choice[i]).filter(price__gte=minprice).filter(price__lte=maxprice).order_by("price")
+                search_list.extend(choice_list)  # 이게 아주 중요함!!
+                # 이 코드를 포함하지 않으면, 가장 나중에 필터링 된 정보만 search_list에 남게 됨.
+                # 리스트명1.extend(리스트명2)은 리스트1에 리스트2의 내용을 포함시켜줌.
+        return render(request, 'search.html', {'search_list':search_list})
+                    
     except:
             search_list = Data.objects.all()
             search_list = Data.objects.order_by("price")
     return render(request, 'search.html', {'search_list':search_list})
+
 
 def only__menu(request):
     menu = request.GET.get('food')
