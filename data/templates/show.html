@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div style="text-align:center;">
+  <form action="{% url 'only__menu' %}" method="GET">
+    <button type="submit" value="전부"  name="food" class="btn btn-dark">전부!</button>
+    <button type="submit" value="한식" name="food" class="btn btn-dark">한식만!</button>
+    <button type="submit" value="중식"  name="food" class="btn btn-dark">중식만!</button>
+    <button type="submit" value="일식"  name="food" class="btn btn-dark">일식만!</button>
+    <button type="submit" value="양식"  name="food" class="btn btn-dark">양식만!</button>
+    <button type="submit" value="디저트"  name="food" class="btn btn-dark">디저트만!</button>
+    <button type="submit" value="기타"  name="food" class="btn btn-dark">이거 말고 다른거!</button>
+  </form>
+</div>
+<br>
+<div style="text-align:right;">
+  <a href="{% url 'sortName'%}" class="btn btn-dark">이름 순으로 정렬</a>
+  <a href="{% url 'sortPrice'%}" class="btn btn-dark">가격 순으로 정렬</a>
+</div>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for data in data.all %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="{{data.photo.url}}" alt ="사진">   
+                <div class="card-body">
+                    <p>가게명:{{data.title}}</p>
+                    <p>주소: {{data.address}}</p>
+                    <p>특별 주소: {{data.specialaddress}}</p>
+                    <p>영업 시간: {{data.time}}</p>
+                    <p>메뉴명: {{data.menu}}</p>
+                    <p>가격: {{data.price}}{{data.priceChar}}</p>
+                    <P>{{data.comment}}</p>
+                    <p><a href="">{{data.hashtag}}</a></p>
+                    <p>{{data.category}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{%url 'detail' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div> 
+<body>
+{% endblock %}

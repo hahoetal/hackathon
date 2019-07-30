@@ -1,0 +1,12 @@
+<h1>리뷰를 남겨주세요. </h1>
+
+<div class = "container">
+    <form method = "POST" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <table>
+        {{reviewform.as_table}}
+        </table>
+        <br>
+        <input type = "submit" value = "리뷰 제출">
+    </form>    
+</div>

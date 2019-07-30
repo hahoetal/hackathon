@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class = "category">
+    <table>
+        <tr>
+            <th>범주</th>
+            <th>음식점명</th>
+            <th>운영시간</th>
+            <th>메뉴</th>
+            <th>가격</th>
+            <th></th>
+        </tr>
+    {% for search_list in search_list %}
+        <tr>
+            <td>{{ search_list.category}}</td>
+            <td>{{ search_list.title }}</td>
+            <td>{{ search_list.time}}</td>
+            <td>{{ search_list.menu}}</td>
+            <td>{{ search_list.price}}{{search_list.priceChar}}</td>
+            <td> <a href="{% url 'detail' search_list.id %}">...more</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>  
+
+{% endblock %}

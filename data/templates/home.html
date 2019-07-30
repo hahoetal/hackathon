@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang = "ko">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<title>쓔집-수정이를 위한 수정이만을 위한 맛집 정보</title>
+<style>
+h1, h3{
+  padding-top:10px;
+  text-align:center;
+}
+#d5 form {
+  position: relative;
+  width: 300px;
+  margin: 0px auto;
+  display: flex;
+}
+#d5 input, .d5 button {
+  outline: none;
+  background: transparent;
+}
+#d5 input {
+  width: 100%;
+  height: 42px;
+  padding-left: 15px;
+  border: 3px solid #DDE7E7;
+}
+#d5 button {
+  border: none;
+  height: 42px;
+  width: 42px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+#d5 button:before {
+  content: "\f002";
+  font-family: 'FontAwesome';
+  font-size: 16px;
+  color: #DDE7E7;
+}
+#d5 input:focus {
+  border-color: #FFFFFF;
+}
+select{
+  border-radius: 5px;
+  height:40px;
+  margin-right:5px;
+  border: 3px;
+}
+#filter form{
+  position: relative;
+  width: 450px;
+  margin: 0px auto;
+}
+#filter input{
+  border:3px solid #DDE7E7;
+}
+#filter button{
+  border: none;
+}
+#filter input:focus {
+  border-color: #FFFFFF;
+}
+
+.accountbox{
+  border: 2px solid black;
+  border-radius: 20%;
+  width:20%;
+  text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+  <script>
+  </script>
+
+<div class="container">
+<br><br>
+<h1>쓔집</h1>
+<h3>수정이를 위한 수정이만을 위한 맛집 정보</h3>
+<br><br>
+
+  <div id = "d5">
+    <form action = "{% url 'search' %}" method = 'GET' style="text-align:right;">
+        <select name = "selSearchType">
+          <option value = "전체">전체</option>
+          <option value = "음식점">음식점</option>
+          <option value = "메뉴">메뉴</option>
+          </optgroup>
+        </select>
+        <input name = "txtSearch" type = "text" value="{{txtSearch}}" placeholder = "검색어 입력">
+        <button type = "submit" ></button>
+    </form>
+     <br>
+  </div>
+
+  <div id="filter">
+    <form action="{% url 'pricefilter' %}" method='GET'>
+    {% comment%}
+      <p>
+        <input type="checkbox" name="category1" value="한식"> 한식
+        <input type="checkbox" name="category2" value="중식"> 중식 
+        <input type="checkbox" name="category3" value="일식"> 일식 
+        <input type="checkbox" name="category4" value="양식"> 양식 
+        <input type="checkbox" name="category5" value="디저트"> 디저트
+        <input type="checkbox" name="category" value="기타">기타
+      </p>
+    {% endcomment %}
+      <p>
+        <input type="checkbox" name="category" value="한식"> 한식
+        <input type="checkbox" name="category" value="중식"> 중식 
+        <input type="checkbox" name="category" value="일식"> 일식 
+        <input type="checkbox" name="category" value="양식"> 양식
+        <input type="checkbox" name="category" value="디저트"> 디저트
+      </p>
+      
+      <p style="display: flex;">
+          <input name = "min_price" type = "number"  placeholder ="최소 가격">
+          <strong>~</strong>
+          <input name = "max_price" type = "number"  placeholder ="최대 가격">
+          <button type = "submit">go!</button>
+        </p>
+    </form>
+
+    <div style="text-align:center;"><br>
+      <a href="{% url 'show' %}">모든 음식 구경하기</a>
+    </div>
+  </div>
+
+  <!-- <div class="accountbox">
+    로그인
+  </div>
+  <div class="accountbox">
+    로그아웃
+  </div> -->
+
+  </div>   
+</body>
+</html>
