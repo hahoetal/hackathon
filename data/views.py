@@ -67,6 +67,20 @@ def pricefilter(request):
             search_list = Data.objects.order_by("price")
     return render(request, 'search.html', {'search_list':search_list})
 
+# 음식 종류를 하나 밖에 선택할 수 없음.
+#def pricefilter(request):
+#    try:
+#            minprice = request.GET.get('min_price')
+#            maxprice = request.GET.get('max_price')
+#            choice = request.GET.get('category')
+#
+#            search_list = Data.objects.filter(category__contains= choice).filter(price__gte=minprice).filter(price__maxprice)
+#           
+#    except:
+#            search_list = Data.objects.all()
+#            search_list = Data.objects.order_by("price")
+#    return render(request, 'search.html', {'search_list':search_list})
+
 
 def only__menu(request):
     menu = request.GET.get('food')
