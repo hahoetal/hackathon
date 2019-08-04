@@ -10,17 +10,39 @@
         .reviewbox{border:1px solid black;}
     </style>
 </head>
-<body>
-<div>
-<h1>리뷰를 보여주는 창입니다. </h1>
 
+<body>
+
+<div class="card mb-4 shadow-sm">
+    <img class="card-img-top" src="{{data.photo.url}}" alt ="사진">   
+    <div class="card-body">
+        <h3>{{data.title}}</h3><br>
+        <div style="text-align:center;">
+        <p>주소: {{data.address}}</p>
+        <p>특별 주소: {{data.specialaddress}}</p>
+        <p>영업 시간: {{data.time}}</p>
+        <p>메뉴명: {{data.menu}}</p>
+        <p>가격: {{data.price}}{{data.priceChar}}</p>
+        <P>{{data.comment}}</p>
+        <p>{{data.hashtag}}</p>
+        <p>{{data.category}}</p>
+        </div>
+    </div>
+</div>
+
+<h1>리뷰를 남겨주세요. </h1>
+
+<form method = "POST" enctype = "multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{reviewform.as_table}}
+    </table>
+    <br>
+    <input type = "submit" value = "리뷰 제출">
+</form>    
 
 
 {% for reviews in posts %}
-    <!-- <h3> {{reviews.author}} </h3>
-    <h3> <img src = "{{reviews.image.url}}" height = 400 alt = "리뷰 사진"> </h3>
-    <h2> {{reviews.title}} </h2>
-    <h2> {{reviews.body}} </h2> -->
     <div class="reviewbox">
     <table>
         <tr>

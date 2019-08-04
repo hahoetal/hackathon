@@ -23,14 +23,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
     path('', data.views.home, name="home"),
     path('accounts/', include('accounts.urls')),
-   
     path('accounts/social/', include('allauth.urls')),
-
-    path('review/review/', review.views.review, name = "review" ),
-    path('review/write/', review.views.user_review, name = "write"),
-
+    path('review/review/data/<int:data_id>', review.views.review, name = "review"),
     path('data/', include('data.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)    

@@ -18,7 +18,7 @@
             <td>{{ search_list.time}}</td>
             <td>{{ search_list.menu}}</td>
             <td>{{ search_list.price}}{{search_list.priceChar}}</td>
-            <td> <a href="{% url 'detail' search_list.id %}">...more</a></td>
+            <td> <a href="{% url 'review' search_list.id %}">...more</a></td>
         </tr>
     {% endfor %}
     </table>

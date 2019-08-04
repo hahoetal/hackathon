@@ -17,10 +17,6 @@ def sortPrice(request):
     data = Data.objects.order_by('price')
     return render(request, 'show.html', {'data':data})
 
-def detail(request, data_id):
-    data_detail = get_object_or_404(Data, pk=data_id)
-    return render(request, 'detail.html', {'data':data_detail})
-
 def search(request):
     try:
         type_search = request.GET.get('selSearchType')

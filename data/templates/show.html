@@ -55,7 +55,7 @@
         {% for data in data.all %}
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="{{data.photo.url}}" alt ="사진">   
+            <img class="card-img-top" src="{{data.photo.url}}" alt ="사진" width="300" height="300">   
                 <div class="card-body">
                     <p>가게명:{{data.title}}</p>
                     <p>주소: {{data.address}}</p>
@@ -64,11 +64,11 @@
                     <p>메뉴명: {{data.menu}}</p>
                     <p>가격: {{data.price}}{{data.priceChar}}</p>
                     <P>{{data.comment}}</p>
-                    <p><a href="">{{data.hashtag}}</a></p>
+                    <p style="color:blue;">{{data.hashtag}}</p>
                     <p>{{data.category}}</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{%url 'detail' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a href="{%url 'review' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
                             </div>
                         </div>
                 </div>
