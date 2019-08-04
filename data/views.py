@@ -23,7 +23,7 @@ def search(request):
         txt_search = request.GET.get('txtSearch')
         if type_search == "전체":
             search_list = Data.objects.filter(title__contains=txt_search)
-            search_list = Data.objects.filter(menu__contains=txt_seaarch)
+            search_list = Data.objects.filter(menu__contains=txt_search)
         elif type_search == "음식점":
             search_list = Data.objects.filter(title__contains=txt_search)
         else:

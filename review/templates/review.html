@@ -38,30 +38,35 @@
     {{reviewform.as_table}}
     </table>
     <br>
-    <input type = "submit" value = "리뷰 제출">
+    <div style="text-align:center;">
+        <input type = "submit" class="btn btn-dark" value = "리뷰 제출">
+    </div>
 </form>    
 
+<br>
 
 {% for reviews in posts %}
     <div class="reviewbox">
     <table>
         <tr>
-            <td>{{reviews.author}}</td>
+            <td>작성자: {{reviews.author}}</td>
         </tr>
         <tr>
             <td><img src = "{{reviews.image.url}}" alt = "리뷰 사진"></td>
         </tr>
         <tr>
-            <td>{{reviews.title}}</td>
+            <td>제목: {{reviews.title}}</td>
         </tr>
         <tr>
-            <td>{{reviews.body}}</td>
+            <td>메뉴: {{reviews.menu}}</td>
+        </tr>
+        <tr>
+            <td>내용: {{reviews.body}}</td>
         </tr>
     </table>
     </div>
     <br>
 {% endfor %}
-
 
 {% if posts.has_previous %}
 <a href="?page=1">First</a>
