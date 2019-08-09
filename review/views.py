@@ -6,7 +6,7 @@ from .form import Reviewform
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib import auth
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def foodinfo(request, data_id): # 음식에 대한 상세 정보를 불러와야 하므로 url을 통해 data_id를 받아온다.(url도 고쳐주기)
@@ -34,14 +34,16 @@ def foodinfo(request, data_id): # 음식에 대한 상세 정보를 불러와야
 
 # 자기가 작성한 리뷰만 따로 모아서 보게 만들고 싶음....
 def myreview(request):
+        reviewer = User.objects.get(username = request.user.get_username())
         reviews = Userreview.objects
-        myname = User.objects.get(username = request.user.get_username())
-        reviews_list = Userreview.objects.all()
-        reviews_list = Userreview.objects.filter(author__contains=myname)
-        paginator = Paginator(reviews_list, 4)
-        page = request.GET.get('page')
-        posts = paginator.get_page(page)
-        return render(request, 'myreview.html', {'reviews': reviews, 'posts': posts})
+        reviews_list = Userreview.objects.filter(author_id = reviewer)
+        #author = User.objects.get(username = request.user.get_username())
+        #reviews_list = Userreview.objects.all()
+        #reviews_list = Userreview.objects.filter(author__contains=logged_user)
+        #paginator = Paginator(reviews_list, 4)
+        #page = request.GET.get('page')
+        #posts = paginator.get_page(page)
+        return render(request, 'myreview.html', {'reviews' : reviews, 'reviewer':reviewer, 'reviews_list' : reviews_list})
 
 def review(request, data_id):
         data = get_object_or_404(Data, pk=data_id)

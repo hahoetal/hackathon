@@ -1,8 +1,12 @@
+<html>
+{% load staticfiles %}
 <head>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
 body{
   margin:0px;
+  height:100%;
 }
 h3, h4, p{
   margin:4px 4px;
@@ -17,8 +21,11 @@ h3{
   padding:100px 30px;
 }
 .reviews{
-  background-color:red;
   overflow:auto;
+}
+.sad{
+  background:url("{% static 'sad.png' %}");
+  height:500px;
 }
 .page{
   text-align:center;
@@ -41,12 +48,14 @@ h3{
       </div>
       {% endfor %}
     {% else %}
-      <div class="card">
+      
+      <div class="card sad">
         <div class="inner2">
           <h6>작성된 리뷰가 없습니다.</h6>
-          <h6>오늘도 맛집을 찾아 헤매는 수정이를 위해 첫 번째 리뷰를 작성해주세요!!</h6>
+          <h6>오늘도 맛집을 찾아 헤매는 수정이를 위해 첫 번째</h6>
+          <h6>리뷰를 작성해주세요!!</h6>
         </div>
-      </div>
+      </div>       
     {% endif %}   
 
       <div class="page">
@@ -67,4 +76,6 @@ h3{
         {% endif %}
       </div>
   </div>
+
 </body>
+</html>

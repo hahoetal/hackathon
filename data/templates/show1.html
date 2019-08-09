@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load staticfiles %}
 
 
 <head>
@@ -44,30 +45,34 @@
 </div>
 <br>
 
-<div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        {% for data in data.all %}
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="{{data.photo.url}}" alt ="사진" width="300" height="300">   
-                <div class="card-body">
-                    <p>가게명:{{data.title}}</p>
-                    <p>메뉴명: {{data.menu}}</p>
-                    <p>가격: {{data.price}}{{data.priceChar}}</p>
-                    <P>{{data.comment}}</p>
-                    <p style="color:blue;">{{data.hashtag}}</p>
-                    <p>{{data.category}}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="{%url 'foodinfo' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div> 
+  <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          {% for data in data.all %}
+          <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+              <img class="card-img-top" src="{{data.photo.url}}" alt ="사진" width="300" height="300">   
+                  <div class="card-body">
+                      <p>가게명:{{data.title}}</p>
+                      <p>메뉴명: {{data.menu}}</p>
+                      <p>가격: {{data.price}}{{data.priceChar}}</p>
+                      <P>{{data.comment}}</p>
+                      <p style="color:blue;">{{data.hashtag}}</p>
+                      <p>{{data.category}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                              <div class="btn-group">
+                                  <a href="{%url 'foodinfo' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
+                              </div>
+                          </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+<div style="position:fixed; bottom:5px; right:5px;">
+  <a href="#"><img src="{% static 'up.png' %}" style="width:50px" title="위로가기"></a>
+</div>
+
 <body>
 {% endblock %}
