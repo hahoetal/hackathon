@@ -1,87 +1,70 @@
-{% extends 'base.html' %}
-
-{% load staticfiles %}
-
-{% block content %}
-
 <head>
-    <style>
-        img{ max-width : 100%; }
-        .reviewbox{border:1px solid black;}
-    </style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+body{
+  margin:0px;
+}
+h3, h4, p{
+  margin:4px 4px;
+}
+h3{
+  align:right;
+}
+.inner1{
+  padding:10px;
+}
+.inner2{
+  padding:100px 30px;
+}
+.reviews{
+  background-color:red;
+  overflow:auto;
+}
+.page{
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
-
-<div class="card mb-4 shadow-sm">
-    <img class="card-img-top" src="{{data.photo.url}}" alt ="사진">   
-    <div class="card-body">
-        <h3>{{data.title}}</h3><br>
-        <div style="text-align:center;">
-        <p>주소: {{data.address}}</p>
-        <p>특별 주소: {{data.specialaddress}}</p>
-        <p>영업 시간: {{data.time}}</p>
-        <p>메뉴명: {{data.menu}}</p>
-        <p>가격: {{data.price}}{{data.priceChar}}</p>
-        <P>{{data.comment}}</p>
-        <p>{{data.hashtag}}</p>
-        <p>{{data.category}}</p>
+  <div class="reviews">
+    {% if posts %}
+      {% for reviews in posts %}
+      <div class="card">
+        <div class="inner1">
+          <h5>작성자: {{reviews.author}}</h5>
+          <img src = "{{reviews.image.url}}" class="card-img-top" alt = "리뷰 사진" width="350">
+          <h4>제목: {{reviews.title}}</h4>
+          <p>메뉴: {{reviews.menu}}</p>
+          <p>내용: {{reviews.body}}</p>
         </div>
-    </div>
-</div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="card">
+        <div class="inner2">
+          <h6>작성된 리뷰가 없습니다.</h6>
+          <h6>오늘도 맛집을 찾아 헤매는 수정이를 위해 첫 번째 리뷰를 작성해주세요!!</h6>
+        </div>
+      </div>
+    {% endif %}   
 
-<h1>리뷰를 남겨주세요. </h1>
+      <div class="page">
+        {% if posts %}
+          {% if posts.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{posts.previous_page_number}}">Previous</a>
+          {% endif %}
 
-<form method = "POST" enctype = "multipart/form-data">
-    {% csrf_token %}
-    <table>
-    {{reviewform.as_table}}
-    </table>
-    <br>
-    <div style="text-align:center;">
-        <input type = "submit" class="btn btn-dark" value = "리뷰 제출">
-    </div>
-</form>    
+          <span>{{posts.number}}</span>
+          <span>of</span>
+          <span>{{posts.paginator.num_pages}}</span>
 
-<br>
-
-{% for reviews in posts %}
-    <div class="reviewbox">
-    <table>
-        <tr>
-            <td>작성자: {{reviews.author}}</td>
-        </tr>
-        <tr>
-            <td><img src = "{{reviews.image.url}}" alt = "리뷰 사진"></td>
-        </tr>
-        <tr>
-            <td>제목: {{reviews.title}}</td>
-        </tr>
-        <tr>
-            <td>메뉴: {{reviews.menu}}</td>
-        </tr>
-        <tr>
-            <td>내용: {{reviews.body}}</td>
-        </tr>
-    </table>
-    </div>
-    <br>
-{% endfor %}
-
-{% if posts.has_previous %}
-<a href="?page=1">First</a>
-<a href="?page={{posts.previous_page_number}}">Previous</a>
-{% endif %}
-
-<span>{{posts.number}}</span>
-<span>of</span>
-<span>{{posts.paginator.num_pages}}</span>
-
-{% if posts.has_next %}
-<a href="?page={{posts.next_page_number}}">Next</a>
-<a href="?page={{posts.paginator.num_pages}}">Last</a>
-{% endif %}
-
-</div>
+          {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">Next</a>
+            <a href="?page={{posts.paginator.num_pages}}">Last</a>
+          {% endif %}
+        {% endif %}
+      </div>
+  </div>
 </body>
-{% endblock %}

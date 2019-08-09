@@ -53,9 +53,6 @@
             <img class="card-img-top" src="{{data.photo.url}}" alt ="사진" width="300" height="300">   
                 <div class="card-body">
                     <p>가게명:{{data.title}}</p>
-                    <p>주소: {{data.address}}</p>
-                    <p>특별 주소: {{data.specialaddress}}</p>
-                    <p>영업 시간: {{data.time}}</p>
                     <p>메뉴명: {{data.menu}}</p>
                     <p>가격: {{data.price}}{{data.priceChar}}</p>
                     <P>{{data.comment}}</p>
@@ -63,7 +60,7 @@
                     <p>{{data.category}}</p>
                     <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{%url 'review' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a href="{%url 'foodinfo' data.id%}" class="btn btn-sm btn-outline-secondary">View</a>
                             </div>
                         </div>
                 </div>

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<head>
+<style>
+h4{
+    margin-top:7px;
+}
+.review{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+}
+.card{
+    margin:5px;
+}
+.page{
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<h3>My reviews</h3><br>
+    <div class="review">
+        {% if posts %}
+            {% for reviews in posts %}
+            <div class="card col-md-5">
+                <div class="card-body">
+                    <h5>작성자: {{reviews.author}}</h5>
+                    <img src = "{{reviews.image.url}}" class="card-img-top" alt = "리뷰 사진">
+                    <h4>제목: {{reviews.title}}</h4>
+                    <p>메뉴: {{reviews.menu}}</p>
+                    <p>내용: {{reviews.body}}</p>
+                </div>
+            </div><br>
+            {% endfor %}               
+        {% else %}
+            <div class="card">
+                <div class="inner">
+                    <p>작성된 리뷰가 없습니다.</p>
+                    <p>오늘도 맛집을 찾아 헤매는 수정이를 위해 첫 번째 리뷰를 작성해주세요!!</p>
+                </div>
+            </div> 
+        {% endif %} 
+    </div><br>
+
+    <div class="page">
+        {% if posts %}
+          {% if posts.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{posts.previous_page_number}}">Previous</a>
+          {% endif %}
+
+          <span>{{posts.number}}</span>
+          <span>of</span>
+          <span>{{posts.paginator.num_pages}}</span>
+
+          {% if posts.has_next %}
+            <a href="?page={{posts.next_page_number}}">Next</a>
+            <a href="?page={{posts.paginator.num_pages}}">Last</a>
+          {% endif %}
+        {% endif %}
+      </div>
+</body>
+
+{% endblock %}

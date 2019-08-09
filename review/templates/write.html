@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>리뷰 수정하기 </h3>
+
+<div class = "container">
+    <form method = "POST" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <table>
+        {{reviewform.as_table}}
+        </table>
+        <br>
+        <input type = "submit" value = "리뷰 수정">
+    </form>    
+</div>
+{% endblock%}

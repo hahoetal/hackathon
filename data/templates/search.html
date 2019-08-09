@@ -1,27 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
+<head>
+<style>
+table{
+  margin:auto;
+}
+.category{
+  height:100%;
+  width: 100%;
+}
+.category table tr th{
+  line-height: 40px;
+  text-align: center;
+  border-bottom:3px solid;
+  width:100px;
+  font-size: 20px;
+}
+.category table tr td{
+  text-align: center;
+  padding:10px;
+}
+</style>
+</head>
 
-<div class = "category">
+<body>
+  <div class = "category">
     <table>
-        <tr>
-            <th>범주</th>
-            <th>음식점명</th>
-            <th>운영시간</th>
-            <th>메뉴</th>
-            <th>가격</th>
-            <th></th>
-        </tr>
-    {% for search_list in search_list %}
-        <tr>
-            <td>{{ search_list.category}}</td>
-            <td>{{ search_list.title }}</td>
-            <td>{{ search_list.time}}</td>
-            <td>{{ search_list.menu}}</td>
-            <td>{{ search_list.price}}{{search_list.priceChar}}</td>
-            <td> <a href="{% url 'review' search_list.id %}">...more</a></td>
-        </tr>
-    {% endfor %}
+      <tr>
+        <th>범주</th>
+        <th>음식점명</th>
+        <th>운영시간</th>
+        <th>메뉴</th>
+        <th>가격</th>
+        <th></th>
+      </tr>
+      {% for search_list in search_list %}
+      <tr>
+        <td>{{ search_list.category}}</td>
+        <td>{{ search_list.title }}</td>
+        <td>{{ search_list.time}}</td>
+        <td>{{ search_list.menu}}</td>
+        <td>{{ search_list.price}}{{search_list.priceChar}}</td>
+        <td> <a href="{% url 'foodinfo' search_list.id %}">...more</a></td>
+      </tr>
+      {% endfor %}
     </table>
-</div>  
+  </div>   
+</body>
 
 {% endblock %}

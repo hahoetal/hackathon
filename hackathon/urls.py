@@ -26,6 +26,8 @@ urlpatterns = [
     path('', data.views.home, name="home"),
     path('accounts/', include('accounts.urls')),
     path('accounts/social/', include('allauth.urls')),
-    path('review/review/data/<int:data_id>', review.views.review, name = "review"),
     path('data/', include('data.urls')),
+    path('review/review/data/<int:data_id>', review.views.foodinfo, name="foodinfo"),
+    path('review/review/data/<int:data_id>/review', review.views.review, name="review"),
+    path('review/myreview', review.views.myreview, name="myreview"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)    
