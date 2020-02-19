@@ -8,3 +8,6 @@ class Userreview(models.Model):
     title = models.CharField(max_length = 100)
     menu = models.CharField(max_length = 200)
     body = models.TextField()
+
+    def summary(self):
+        return self.body[:50]

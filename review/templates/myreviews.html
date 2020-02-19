@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<head>
+<style>
+h4{
+    margin-top:7px;
+}
+.review{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+}
+.card{
+    margin:5px;
+}
+.page{
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<h3>My reviews</h3><br>
+
+    <div class="review">
+        {% if myposts %}
+            {% for myreviews in myposts %} 
+                <div class="card col-md-5">
+                    <img src="{{myreviews.image.url}}" class="card-img-top" height = 300 alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"> 제목: {{myreviews.title}}</h5>
+                        <ul class="list-group list-group-flush"> 
+                            <p class="list-group-item">메뉴: {{myreviews.menu}}</p>
+                            <p class="list-group-item">내용: {{myreviews.body}}</p>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div><br><br>
+
+         <div class="page">
+            {% if myposts %}
+                {% if myposts.has_previous %}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{myposts.previous_page_number}}">Previous</a>
+                {% endif %}
+
+                    <span>{{myposts.number}}</span>
+                    <span>of</span>
+                    <span>{{myposts.paginator.num_pages}}</span>
+
+                {% if myposts.has_next %}
+                    <a href="?page={{myposts.next_page_number}}">Next</a>
+                    <a href="?page={{myposts.paginator.num_pages}}">Last</a>
+                {% endif %}
+            {% endif %}
+        </div>
+                      
+        {% else %}
+            <div class="card col-md-8" style="text-align:center;">          
+                <br><p>작성하신 리뷰가 없습니다.</p>
+                <p>수정이들에게 소개해주고 싶은 메뉴가 있다면...  리뷰를 써주세요!!</p>
+                <p>당신의 리뷰가 수정이의 즐거운 식사 시간을 만들어줄 것입니다~~~</p><br>
+            </div> 
+        {% endif %}
+    <br>
+</body>
+
+{% endblock %}

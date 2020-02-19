@@ -5,8 +5,4 @@ class Reviewform(forms.ModelForm):
     class Meta:
         model = Userreview
         fields = ['image', 'title', 'body']
-
-class Editform(forms.ModelForm):
-    class Meta:
-        model = Userreview
-        fields = ['title', 'image', 'menu', 'body']
+        # fields = '__all__' models.py에서 지정한 모든 필드?를 사용하고 싶을 때 사용.

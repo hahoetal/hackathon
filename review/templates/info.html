@@ -28,20 +28,26 @@ aside{
   flex-direction:column;
   flex-wrap:wrap;
 }
-.form{
+.form_before{
   background:url("{% static 'write.png' %}") no-repeat bottom;
-  height:47.3%;
+  height:48.5%;
   border-radius:5px;
-  border:2px;
+  border:1px solid;
+  border-color:lightgrey;
+}
+.form{
+  height:48.5%;
+  margin-bottom:0px;
 }
 .message{
   text-align:center;
   margin:90px 5px;
 }
 .reviews{
-  height:52.7%;
+  height:47.6%;
   border-radius:5px;
-  border:2px;
+  border:1px solid;
+  border-color:lightgrey;
 }
 .inner{
   padding:10px;
@@ -111,14 +117,14 @@ aside{
           </div>
       </div>
       {%else%}
-      <div class="form">
+      <div class="form_before">
         <div class="message">
           <h4>로그인 후 리뷰를 작성해주세요!!</h4>
           <a class="btn btn-outline-dark " href="{% url 'login' %}">Login!</a>
         </div>
       </div>
       {% endif%}
-      
+      <h4>Reviews</h4>
         <div class="reviews">
         <!--리뷰 페이지를 넘길 때마다 전체 화면이 새롭게 바뀌는게 싫어서 iframe 사용!!, iframe용 url, 함수 만들어주기.-->
           <iframe src="{% url 'review' data.id %}" width="100%" height="100%" frameborder="0"></iframe>
